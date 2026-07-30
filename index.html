@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🎁 Gift For You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Экран приветствия -->
+
+    <div id="intro">
+
+        <h1>A little surprise is waiting for you...</h1>
+
+        <button id="continueBtn">
+            Continue →
+        </button>
+
+    </div>
+
+
+    <!-- Экран с подарком -->
+
+    <div id="giftScreen">
+
+        <img
+            id="giftBox"
+            src="assets/gift-box.png"
+            alt="Gift">
+
+        <p>Tap the gift</p>
+
+    </div>
+
+
+    <!-- Подарок -->
+
+    <div id="result">
+
+        <img
+            id="giftImage"
+            src="assets/gift.png"
+            alt="Gift">
+
+        <h2>For Madina </h2>
+
+        <p id="message">
+            You deserve all the happiness in the world.
+        </p>
+
+    </div>
+
+
+    <canvas id="canvas"></canvas>
+
+    <audio id="music" loop>
+
+        <source src="music.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
