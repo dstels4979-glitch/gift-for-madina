@@ -1,80 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>🎁 Gift For Madina</title>
+<title>Для тебя ❤️</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
 </head>
+
 
 <body>
 
-    <!-- Фон -->
-    <canvas id="canvas"></canvas>
 
-    <!-- Экран приветствия -->
-    <div id="intro">
+<canvas id="canvas"></canvas>
 
-        <h1>A little surprise is waiting for you...</h1>
+
+<!-- Первый экран -->
+
+<section id="intro">
+
+    <div class="intro-box">
+
+        <h1>У меня есть кое-что для тебя ❤️</h1>
 
         <button id="continueBtn">
-            Continue →
+            Продолжить
         </button>
 
     </div>
 
-    <!-- Экран с подарком -->
-    <div id="giftScreen">
+</section>
 
-        <div class="gift-container" id="giftBox">
 
-    <div class="box">
 
-        <div class="lid"></div>
 
-        <div class="box-body">
-            🎁
+<!-- Подарок -->
+
+<section id="giftScreen">
+
+
+    <div class="gift-container" id="giftBox">
+
+
+        <div class="box">
+
+
+            <div class="lid"></div>
+
+
+            <div class="box-body">
+
+                🎁
+
+            </div>
+
+
         </div>
 
-    </div>
-
-</div>
-
-        <p class="tapText">
-            🎁 Tap the gift
-        </p>
 
     </div>
 
-    <!-- Финальный экран -->
-    <div id="result">
 
-        <img
-            id="giftImage"
-            src="assets/gift.png"
-            alt="Gift">
+    <p>
+        Нажми на подарок ✨
+    </p>
 
-        <h2>For Madina </h2>
 
-        <p id="message">
-            You deserve all the happiness in the world.
-        </p>
+</section>
+
+
+
+
+
+<!-- Финал -->
+
+<section id="result">
+
+
+    <div class="message-box">
+
+
+        <h1 id="title"></h1>
+
+
+        <p id="text"></p>
+
 
     </div>
 
-    <!-- Музыка -->
-    <audio id="music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
 
-    <!-- GSAP -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+</section>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+
+
+
+<audio id="music" src="music.mp3"></audio>
+
+
+<script src="script.js"></script>
+
 
 </body>
 
