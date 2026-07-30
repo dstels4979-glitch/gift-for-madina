@@ -1,106 +1,81 @@
 const intro = document.getElementById("intro");
-const giftScreen = document.getElementById("giftScreen");
-const result = document.getElementById("result");
-
 const continueBtn = document.getElementById("continueBtn");
+
+const giftScreen = document.getElementById("giftScreen");
 const giftBox = document.getElementById("giftBox");
+
+const result = document.getElementById("result");
+const giftImage = document.getElementById("giftImage");
 
 const music = document.getElementById("music");
 
-continueBtn.onclick = () => {
+// Показываем коробку
+continueBtn.addEventListener("click", () => {
 
-    intro.style.display = "none";
-    giftScreen.style.display = "flex";
+    gsap.to(intro, {
+        opacity: 0,
+        duration: 1,
+        onComplete: () => {
 
-}
+            intro.style.display = "none";
+            giftScreen.style.display = "flex";
 
-giftBox.onclick = () => {
+            gsap.from("#giftBox", {
+                y: -500,
+                duration: 1.4,
+                ease: "bounce.out"
+            });
+
+        }
+    });
+
+});
+
+// Нажатие на коробку
+giftBox.addEventListener("click", () => {
 
     music.play();
 
-    giftBox.style.animation = "shake .5s infinite";
-    
-    createConfetti();
+    // Тряска
+    gsap.to(giftBox, {
+        rotation: -6,
+        duration: 0.08,
+        repeat: 15,
+        yoyo: true
+    });
+
+    // Свечение
+    gsap.to(giftBox, {
+        filter: "drop-shadow(0 0 40px gold)",
+        duration: .4,
+        yoyo: true,
+        repeat: 3
+    });
+
+    setTimeout(() => {
+
+        giftBox.src = "assets/gift-box-open.png";
+
+    },1200);
 
     setTimeout(() => {
 
         giftScreen.style.display = "none";
         result.style.display = "flex";
 
-        document.getElementById("giftImage").style.opacity = "1";
-        document.getElementById("giftImage").style.transform = "translateY(0)";
-
-    },2500);
-
-}
-// --------------------
-// Конфетти
-// --------------------
-
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-window.addEventListener("resize", () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-});
-
-const confetti = [];
-
-function createConfetti() {
-
-    for (let i = 0; i < 250; i++) {
-
-        confetti.push({
-
-            x: canvas.width / 2,
-            y: canvas.height / 2,
-
-            vx: (Math.random() - 0.5) * 12,
-            vy: Math.random() * -12 - 4,
-
-            size: Math.random() * 8 + 4,
-
-            color: `hsl(${Math.random()*360},100%,60%)`,
-
-            life: 200
-
+        gsap.to(giftImage,{
+            opacity:1,
+            y:-20,
+            duration:1
         });
 
-    }
+        gsap.from("#message",{
+            opacity:0,
+            y:40,
+            duration:1,
+            delay:.5
+        });
 
-}
+    },2200);
 
-function drawConfetti(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    confetti.forEach((c,index)=>{
-
-        c.x+=c.vx;
-        c.y+=c.vy;
-
-        c.vy+=0.15;
-
-        c.life--;
-
-        ctx.fillStyle=c.color;
-
-        ctx.fillRect(c.x,c.y,c.size,c.size);
-
-        if(c.life<=0){
-
-            confetti.splice(index,1);
-
-        }
-
-    });
-
-    requestAnimationFrame(drawConfetti);
-
-}
-
-drawConfetti();
+});
