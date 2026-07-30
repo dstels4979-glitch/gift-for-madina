@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>🎁 Gift For You</title>
+    <title>🎁 Gift For Madina</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-    <!-- Экран приветствия -->
+    <!-- Фон -->
+    <canvas id="canvas"></canvas>
 
+    <!-- Экран приветствия -->
     <div id="intro">
 
         <h1>A little surprise is waiting for you...</h1>
@@ -26,23 +26,21 @@
 
     </div>
 
-
     <!-- Экран с подарком -->
-
     <div id="giftScreen">
 
         <img
             id="giftBox"
             src="assets/gift-box.png"
-            alt="Gift">
+            alt="Gift Box">
 
-        <p>Tap the gift</p>
+        <p class="tapText">
+            🎁 Tap the gift
+        </p>
 
     </div>
 
-
-    <!-- Подарок -->
-
+    <!-- Финальный экран -->
     <div id="result">
 
         <img
@@ -58,16 +56,15 @@
 
     </div>
 
-
-    <canvas id="canvas"></canvas>
-
+    <!-- Музыка -->
     <audio id="music" loop>
-
         <source src="music.mp3" type="audio/mpeg">
-
     </audio>
 
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
+    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
