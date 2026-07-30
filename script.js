@@ -32,7 +32,45 @@ continueBtn.addEventListener("click", () => {
 });
 
 // Нажатие на коробку
-giftBox.addEventListener("click", () => {
+giftBox.addEventListener("click",()=>{
+
+
+    giftBox.classList.add("open");
+
+
+    gsap.to(giftBox,{
+        scale:1.2,
+        duration:0.5
+    });
+
+
+    setTimeout(()=>{
+
+
+        giftScreen.style.display="none";
+
+        result.style.display="flex";
+
+
+        gsap.from(result,{
+            opacity:0,
+            scale:0.3,
+            duration:1,
+            ease:"back.out"
+        });
+
+
+        music.play();
+
+
+        createHearts();
+
+
+    },1200);
+
+
+
+});
 
     music.play();
 
