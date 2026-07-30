@@ -1,20 +1,18 @@
 const continueBtn = document.getElementById("continueBtn");
-
 const intro = document.getElementById("intro");
-
 const giftScreen = document.getElementById("giftScreen");
-
 const giftBox = document.getElementById("giftBox");
-
 const result = document.getElementById("result");
-
 const music = document.getElementById("music");
 
 
+// музыка
+music.loop = true;
+music.volume = 0.5;
 
 
 
-// ПЕРВЫЙ ЭКРАН
+// кнопка продолжить
 
 continueBtn.addEventListener("click",()=>{
 
@@ -49,7 +47,7 @@ continueBtn.addEventListener("click",()=>{
 
                 y:-300,
 
-                scale:0.5,
+                scale:0.4,
 
                 rotation:20,
 
@@ -62,7 +60,6 @@ continueBtn.addEventListener("click",()=>{
 
         }
 
-
     });
 
 
@@ -73,11 +70,15 @@ continueBtn.addEventListener("click",()=>{
 
 
 
-
-// ОТКРЫТИЕ ПОДАРКА
-
+// открытие подарка
 
 giftBox.addEventListener("click",()=>{
+
+
+    // запускаем музыку после действия пользователя
+
+    music.play().catch(()=>{});
+
 
 
     giftBox.classList.add("open");
@@ -86,11 +87,9 @@ giftBox.addEventListener("click",()=>{
 
     gsap.to(".box",{
 
-
         scale:1.2,
 
         duration:0.5
-
 
     });
 
@@ -123,20 +122,9 @@ giftBox.addEventListener("click",()=>{
 
 
 
-        music.volume=0.5;
-
-
-        music.play();
-
-
-
         createHearts();
 
-
-
-        stars();
-
-
+        createStars();
 
         showText();
 
@@ -154,48 +142,78 @@ giftBox.addEventListener("click",()=>{
 
 
 
-
-// ТЕКСТ
+// печатающийся текст
 
 
 function showText(){
 
 
-const title="Для тебя ❤️";
+    let title =
+    "Для тебя ❤️";
 
 
-const message=
-"Пусть каждый день приносит тебе улыбки, счастье и красивые моменты ✨";
-
-
-
-type(
-
-document.getElementById("title"),
-
-title,
-
-120
-
-);
+    let message =
+    "Пусть каждый день твоей жизни будет наполнен счастьем, улыбками и красивыми моментами ✨";
 
 
 
-setTimeout(()=>{
+    typeText(
+
+        document.getElementById("title"),
+
+        title,
+
+        120
+
+    );
 
 
-type(
 
-document.getElementById("text"),
-
-message,
-
-50
-
-);
+    setTimeout(()=>{
 
 
-},1500);
+        typeText(
+
+            document.getElementById("text"),
+
+            message,
+
+            50
+
+        );
+
+
+    },1500);
+
+
+
+}
+
+
+
+function typeText(element,text,speed){
+
+
+    let i=0;
+
+
+    let timer=setInterval(()=>{
+
+
+        element.innerHTML += text[i];
+
+
+        i++;
+
+
+        if(i>=text.length){
+
+            clearInterval(timer);
+
+        }
+
+
+    },speed);
 
 
 
@@ -204,101 +222,74 @@ message,
 
 
 
-function type(element,text,speed){
-
-
-let i=0;
-
-
-let timer=setInterval(()=>{
-
-
-element.innerHTML+=text[i];
-
-
-i++;
-
-
-if(i>=text.length)
-
-clearInterval(timer);
 
 
 
-},speed);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// СЕРДЕЧКИ
+// сердечки
 
 
 function createHearts(){
 
 
-for(let i=0;i<50;i++){
+    for(let i=0;i<60;i++){
 
 
-let heart=document.createElement("div");
+        let heart=document.createElement("div");
 
 
-heart.innerHTML="❤️";
+        heart.innerHTML="❤️";
 
 
-heart.style.position="fixed";
+        heart.style.position="fixed";
 
+        heart.style.left=Math.random()*100+"vw";
 
-heart.style.left=Math.random()*100+"vw";
+        heart.style.top="100vh";
 
+        heart.style.fontSize=
+        (15+Math.random()*35)+"px";
 
-heart.style.top="100vh";
-
-
-heart.style.fontSize=
-(15+Math.random()*30)+"px";
-
-
-
-document.body.appendChild(heart);
+        heart.style.zIndex="10";
 
 
 
-gsap.to(heart,{
-
-    y:-window.innerHeight-200,
-
-    x:(Math.random()-0.5)*400,
-
-    rotation:360,
-
-    opacity:0,
-
-    duration:3+Math.random()*3,
+        document.body.appendChild(heart);
 
 
-    onComplete:()=>{
 
-        heart.remove();
+        gsap.to(heart,{
+
+
+            y:-window.innerHeight-200,
+
+
+            x:(Math.random()-0.5)*500,
+
+
+            rotation:360,
+
+
+            opacity:0,
+
+
+            duration:3+Math.random()*3,
+
+
+
+            onComplete:()=>{
+
+                heart.remove();
+
+            }
+
+
+        });
+
+
 
     }
 
 
-});
-
-
-
-}
-
-
 }
 
 
@@ -308,67 +299,76 @@ gsap.to(heart,{
 
 
 
-// ФОН СО ЗВЕЗДАМИ
+// звёзды
 
 
-function stars(){
+function createStars(){
 
 
-for(let i=0;i<100;i++){
+    for(let i=0;i<120;i++){
 
 
-let star=document.createElement("div");
+        let star=document.createElement("div");
 
 
-star.style.position="fixed";
-
-star.style.width="3px";
-
-star.style.height="3px";
-
-star.style.background="white";
-
-star.style.borderRadius="50%";
+        star.className="star";
 
 
-star.style.left=Math.random()*100+"vw";
+        star.style.position="fixed";
 
-star.style.top=Math.random()*100+"vh";
+        star.style.width="3px";
 
+        star.style.height="3px";
 
-document.body.appendChild(star);
+        star.style.background="white";
 
-
-
-gsap.to(star,{
-
-opacity:0.2,
-
-duration:1+Math.random()*3,
-
-repeat:-1,
-
-yoyo:true
+        star.style.borderRadius="50%";
 
 
-});
+        star.style.left=
+        Math.random()*100+"vw";
 
+
+        star.style.top=
+        Math.random()*100+"vh";
+
+
+        document.body.appendChild(star);
+
+
+
+        gsap.to(star,{
+
+
+            opacity:0.2,
+
+
+            duration:
+            1+Math.random()*3,
+
+
+            repeat:-1,
+
+
+            yoyo:true
+
+
+        });
+
+
+    }
 
 
 }
 
 
 
-}
 
 
 
 
 
-
-
-
-// CANVAS ЧАСТИЦЫ
+// частицы canvas
 
 
 const canvas=document.getElementById("canvas");
@@ -376,92 +376,122 @@ const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
 
-canvas.width=innerWidth;
+canvas.width=window.innerWidth;
 
-canvas.height=innerHeight;
+canvas.height=window.innerHeight;
 
 
 
 let particles=[];
 
 
-for(let i=0;i<100;i++){
+
+for(let i=0;i<150;i++){
 
 
-particles.push({
+    particles.push({
 
 
-x:Math.random()*canvas.width,
-
-y:Math.random()*canvas.height,
-
-size:Math.random()*3,
-
-speed:Math.random()*1+0.2
+        x:Math.random()*canvas.width,
 
 
-});
+        y:Math.random()*canvas.height,
+
+
+        size:Math.random()*3,
+
+
+        speed:Math.random()+0.2
+
+
+    });
+
 
 
 }
 
 
 
-function animate(){
+
+function animateParticles(){
 
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-
-particles.forEach(p=>{
-
-
-ctx.beginPath();
-
-
-ctx.arc(
-
-p.x,
-
-p.y,
-
-p.size,
-
-0,
-
-Math.PI*2
-
-);
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
 
 
-ctx.fillStyle="white";
+    particles.forEach(p=>{
 
 
-ctx.fill();
+        ctx.beginPath();
+
+
+        ctx.arc(
+
+            p.x,
+
+            p.y,
+
+            p.size,
+
+            0,
+
+            Math.PI*2
+
+        );
 
 
 
-p.y-=p.speed;
+        ctx.fillStyle="white";
+
+
+        ctx.fill();
 
 
 
-if(p.y<0)
-
-p.y=canvas.height;
+        p.y-=p.speed;
 
 
 
-});
+        if(p.y<0){
+
+            p.y=canvas.height;
+
+        }
+
+
+    });
 
 
 
-requestAnimationFrame(animate);
+    requestAnimationFrame(animateParticles);
 
 
 }
 
 
 
-animate();
+animateParticles();
+
+
+
+
+
+
+// адаптация размера окна
+
+
+window.addEventListener("resize",()=>{
+
+
+    canvas.width=window.innerWidth;
+
+    canvas.height=window.innerHeight;
+
+
+});
